@@ -1,0 +1,62 @@
+# 虚拟环境
+.venv/
+venv/
+env/
+
+# Python缓存文件
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# 日志文件
+*.log
+monitor_debug.log
+
+# 环境变量文件
+.env
+.env.local
+.env.production
+
+# IDE文件
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 临时文件
+*.tmp
+*.temp
+
+# 测试文件
+test/
+tests/
+*.test.py
+
+# 文档文件
+README*.md
+*.md
+
+# Node.js文件（如果存在）
+node_modules/
+package.json
+package-lock.json
+yarn.lock
+
+# 开发工具配置
+.eslintrc*
+.prettierrc*
+.editorconfig
+
+# 构建输出
+build/
+dist/
+out/
+
+# Git文件
+.git/
+.gitignore

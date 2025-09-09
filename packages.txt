@@ -1,3 +1,0 @@
-build-essential
-wget
-ta-lib-dev

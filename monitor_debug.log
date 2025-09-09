@@ -1,0 +1,562 @@
+2025-09-10 00:38:06,641 - enhanced_realtime_monitor - INFO - 初始化监控器: webhook_url=https://n8n-ayzvkyda.ap-northeast-1.clawcloudrun.com/webhook/double_t_b, min_volume_24h=20000000
+2025-09-10 00:38:06,641 - enhanced_realtime_monitor - INFO - API认证已配置: api_key=lXsXOr3L...
+2025-09-10 00:38:06,641 - enhanced_realtime_monitor - INFO - 使用币安API定期获取数据，无需WebSocket连接
+2025-09-10 00:38:06,641 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 00:38:06,646 - enhanced_realtime_monitor - INFO - 🚀 开始增强版定时信号监控...
+2025-09-10 00:38:06,646 - enhanced_realtime_monitor - INFO - 🔄 使用固定的备用交易对列表
+2025-09-10 00:38:06,647 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 00:38:06,647 - enhanced_realtime_monitor - INFO - 📊 备用列表状态: 使用 5 个交易对
+2025-09-10 00:38:06,647 - enhanced_realtime_monitor - INFO - 📡 将监控 5 个动态备用交易对
+2025-09-10 00:38:06,648 - enhanced_realtime_monitor - INFO - 📊 开始预加载历史数据...
+2025-09-10 00:38:06,648 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 00:38:06,648 - enhanced_realtime_monitor - DEBUG - 获取 BNBUSDT 历史数据: 200 根K线
+2025-09-10 00:38:06,651 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-09-10 00:38:06,651 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 00:38:06,652 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 00:38:06,652 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 00:38:06,718 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 00:38:06,720 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 00:38:06,774 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 00:38:06,775 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 00:38:06,861 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 00:38:06,922 - httpcore.connection - DEBUG - connect_tcp.started host='api.gradio.app' port=443 local_address=None timeout=3 socket_options=None
+2025-09-10 00:38:06,994 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x000001D60313D410>
+2025-09-10 00:38:06,994 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x000001D603417770> server_hostname='api.gradio.app' timeout=3
+2025-09-10 00:38:07,171 - httpcore.connection - DEBUG - connect_tcp.started host='localhost' port=80 local_address=None timeout=None socket_options=None
+2025-09-10 00:38:07,345 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=BNBUSDT&interval=1h&limit=200 HTTP/1.1" 200 None
+2025-09-10 00:38:07,357 - enhanced_realtime_monitor - INFO - ✅ BNBUSDT 历史数据加载完成: 200 根K线
+2025-09-10 00:38:07,440 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /api/telemetry/gradio/initiated HTTP/1.1" 200 0
+2025-09-10 00:38:07,567 - enhanced_realtime_monitor - INFO - ✅ BNBUSDT 预加载完成: 200 根K线
+2025-09-10 00:38:07,873 - enhanced_realtime_monitor - DEBUG - 获取 ADAUSDT 历史数据: 200 根K线
+2025-09-10 00:38:07,874 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 00:38:07,932 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x000001D603CABC90>
+2025-09-10 00:38:07,933 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'GET']>
+2025-09-10 00:38:07,933 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-10 00:38:07,933 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'GET']>
+2025-09-10 00:38:07,934 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-10 00:38:07,934 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'GET']>
+2025-09-10 00:38:08,211 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Tue, 09 Sep 2025 16:38:07 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'21'), (b'Connection', b'keep-alive'), (b'Server', b'nginx/1.18.0'), (b'Access-Control-Allow-Origin', b'*')])
+2025-09-10 00:38:08,212 - httpx - INFO - HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2025-09-10 00:38:08,212 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'GET']>
+2025-09-10 00:38:08,212 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-10 00:38:08,212 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-10 00:38:08,212 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-10 00:38:08,213 - httpcore.connection - DEBUG - close.started
+2025-09-10 00:38:08,213 - httpcore.connection - DEBUG - close.complete
+2025-09-10 00:38:08,548 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=ADAUSDT&interval=1h&limit=200 HTTP/1.1" 200 None
+2025-09-10 00:38:08,558 - enhanced_realtime_monitor - INFO - ✅ ADAUSDT 历史数据加载完成: 200 根K线
+2025-09-10 00:38:08,764 - enhanced_realtime_monitor - INFO - ✅ ADAUSDT 预加载完成: 200 根K线
+2025-09-10 00:38:09,079 - enhanced_realtime_monitor - DEBUG - 获取 BTCUSDT 历史数据: 200 根K线
+2025-09-10 00:38:09,081 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 00:38:09,784 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=BTCUSDT&interval=1h&limit=200 HTTP/1.1" 200 None
+2025-09-10 00:38:09,855 - enhanced_realtime_monitor - INFO - ✅ BTCUSDT 历史数据加载完成: 200 根K线
+2025-09-10 00:38:10,063 - enhanced_realtime_monitor - INFO - ✅ BTCUSDT 预加载完成: 200 根K线
+2025-09-10 00:38:10,369 - enhanced_realtime_monitor - DEBUG - 获取 ETHUSDT 历史数据: 200 根K线
+2025-09-10 00:38:10,370 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 00:38:10,828 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=ETHUSDT&interval=1h&limit=200 HTTP/1.1" 200 None
+2025-09-10 00:38:10,840 - enhanced_realtime_monitor - INFO - ✅ ETHUSDT 历史数据加载完成: 200 根K线
+2025-09-10 00:38:11,044 - enhanced_realtime_monitor - INFO - ✅ ETHUSDT 预加载完成: 200 根K线
+2025-09-10 00:38:11,228 - httpcore.connection - DEBUG - connect_tcp.failed exception=ConnectError(ConnectionRefusedError(10061, '由于目标计算机积极拒绝，无法连接。', None, 10061, None))
+2025-09-10 00:39:59,834 - enhanced_realtime_monitor - INFO - 初始化监控器: webhook_url=https://n8n-ayzvkyda.ap-northeast-1.clawcloudrun.com/webhook/double_t_b, min_volume_24h=20000000
+2025-09-10 00:39:59,834 - enhanced_realtime_monitor - INFO - API认证已配置: api_key=lXsXOr3L...
+2025-09-10 00:39:59,835 - enhanced_realtime_monitor - INFO - 使用币安API定期获取数据，无需WebSocket连接
+2025-09-10 00:39:59,835 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 00:39:59,838 - enhanced_realtime_monitor - INFO - 🚀 开始增强版定时信号监控...
+2025-09-10 00:39:59,838 - enhanced_realtime_monitor - INFO - 🔄 使用固定的备用交易对列表
+2025-09-10 00:39:59,838 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 00:39:59,838 - enhanced_realtime_monitor - INFO - 📊 备用列表状态: 使用 5 个交易对
+2025-09-10 00:39:59,838 - enhanced_realtime_monitor - INFO - 📡 将监控 5 个动态备用交易对
+2025-09-10 00:39:59,838 - enhanced_realtime_monitor - INFO - 📊 开始预加载历史数据...
+2025-09-10 00:39:59,838 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 00:39:59,838 - enhanced_realtime_monitor - DEBUG - 获取 BTCUSDT 历史数据: 200 根K线
+2025-09-10 00:39:59,843 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-09-10 00:39:59,843 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 00:39:59,844 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 00:39:59,845 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 00:39:59,913 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 00:39:59,914 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 00:39:59,967 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 00:39:59,971 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 00:40:00,056 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 00:40:00,147 - httpcore.connection - DEBUG - connect_tcp.started host='api.gradio.app' port=443 local_address=None timeout=3 socket_options=None
+2025-09-10 00:40:00,164 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x000002AD07ED4B10>
+2025-09-10 00:40:00,164 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x000002AD07633B60> server_hostname='api.gradio.app' timeout=3
+2025-09-10 00:40:00,322 - httpcore.connection - DEBUG - connect_tcp.started host='127.0.0.1' port=7860 local_address=None timeout=None socket_options=None
+2025-09-10 00:40:00,323 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x000002AD07ED5B10>
+2025-09-10 00:40:00,323 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'GET']>
+2025-09-10 00:40:00,324 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-10 00:40:00,325 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'GET']>
+2025-09-10 00:40:00,325 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-10 00:40:00,325 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'GET']>
+2025-09-10 00:40:00,325 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'date', b'Tue, 09 Sep 2025 16:40:00 GMT'), (b'server', b'uvicorn'), (b'content-length', b'4'), (b'content-type', b'application/json')])
+2025-09-10 00:40:00,326 - httpx - INFO - HTTP Request: GET http://127.0.0.1:7860/gradio_api/startup-events "HTTP/1.1 200 OK"
+2025-09-10 00:40:00,326 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'GET']>
+2025-09-10 00:40:00,326 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-10 00:40:00,326 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-10 00:40:00,326 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-10 00:40:00,326 - httpcore.connection - DEBUG - close.started
+2025-09-10 00:40:00,326 - httpcore.connection - DEBUG - close.complete
+2025-09-10 00:40:00,327 - httpcore.connection - DEBUG - connect_tcp.started host='127.0.0.1' port=7860 local_address=None timeout=3 socket_options=None
+2025-09-10 00:40:00,328 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x000002AD07ED7C50>
+2025-09-10 00:40:00,328 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'HEAD']>
+2025-09-10 00:40:00,329 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-10 00:40:00,329 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'HEAD']>
+2025-09-10 00:40:00,330 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-10 00:40:00,330 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'HEAD']>
+2025-09-10 00:40:00,390 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=BTCUSDT&interval=1h&limit=200 HTTP/1.1" 200 None
+2025-09-10 00:40:00,403 - enhanced_realtime_monitor - INFO - ✅ BTCUSDT 历史数据加载完成: 200 根K线
+2025-09-10 00:40:00,412 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'date', b'Tue, 09 Sep 2025 16:40:00 GMT'), (b'server', b'uvicorn'), (b'content-length', b'15525'), (b'content-type', b'text/html; charset=utf-8')])
+2025-09-10 00:40:00,412 - httpx - INFO - HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+2025-09-10 00:40:00,412 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'HEAD']>
+2025-09-10 00:40:00,413 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-10 00:40:00,413 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-10 00:40:00,413 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-10 00:40:00,413 - httpcore.connection - DEBUG - close.started
+2025-09-10 00:40:00,413 - httpcore.connection - DEBUG - close.complete
+2025-09-10 00:40:00,415 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-09-10 00:40:00,614 - enhanced_realtime_monitor - INFO - ✅ BTCUSDT 预加载完成: 200 根K线
+2025-09-10 00:40:00,704 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /api/telemetry/gradio/initiated HTTP/1.1" 200 0
+2025-09-10 00:40:00,924 - enhanced_realtime_monitor - DEBUG - 获取 BNBUSDT 历史数据: 200 根K线
+2025-09-10 00:40:00,926 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 00:40:00,992 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /api/telemetry/gradio/launched HTTP/1.1" 200 0
+2025-09-10 00:40:01,077 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x000002AD07291510>
+2025-09-10 00:40:01,077 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'GET']>
+2025-09-10 00:40:01,078 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-10 00:40:01,078 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'GET']>
+2025-09-10 00:40:01,078 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-10 00:40:01,079 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'GET']>
+2025-09-10 00:40:01,379 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Tue, 09 Sep 2025 16:40:00 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'21'), (b'Connection', b'keep-alive'), (b'Server', b'nginx/1.18.0'), (b'Access-Control-Allow-Origin', b'*')])
+2025-09-10 00:40:01,380 - httpx - INFO - HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2025-09-10 00:40:01,380 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'GET']>
+2025-09-10 00:40:01,380 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-10 00:40:01,380 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-10 00:40:01,380 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-10 00:40:01,381 - httpcore.connection - DEBUG - close.started
+2025-09-10 00:40:01,381 - httpcore.connection - DEBUG - close.complete
+2025-09-10 00:40:01,422 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=BNBUSDT&interval=1h&limit=200 HTTP/1.1" 200 None
+2025-09-10 00:40:01,432 - enhanced_realtime_monitor - INFO - ✅ BNBUSDT 历史数据加载完成: 200 根K线
+2025-09-10 00:40:01,635 - enhanced_realtime_monitor - INFO - ✅ BNBUSDT 预加载完成: 200 根K线
+2025-09-10 00:40:01,949 - enhanced_realtime_monitor - DEBUG - 获取 ADAUSDT 历史数据: 200 根K线
+2025-09-10 00:40:01,951 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 00:40:02,374 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=ADAUSDT&interval=1h&limit=200 HTTP/1.1" 200 None
+2025-09-10 00:40:02,386 - enhanced_realtime_monitor - INFO - ✅ ADAUSDT 历史数据加载完成: 200 根K线
+2025-09-10 00:40:02,597 - enhanced_realtime_monitor - INFO - ✅ ADAUSDT 预加载完成: 200 根K线
+2025-09-10 00:40:02,909 - enhanced_realtime_monitor - DEBUG - 获取 ETHUSDT 历史数据: 200 根K线
+2025-09-10 00:40:02,910 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 00:40:03,541 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=ETHUSDT&interval=1h&limit=200 HTTP/1.1" 200 None
+2025-09-10 00:40:03,553 - enhanced_realtime_monitor - INFO - ✅ ETHUSDT 历史数据加载完成: 200 根K线
+2025-09-10 00:40:03,767 - enhanced_realtime_monitor - INFO - ✅ ETHUSDT 预加载完成: 200 根K线
+2025-09-10 00:40:04,074 - enhanced_realtime_monitor - DEBUG - 获取 SOLUSDT 历史数据: 200 根K线
+2025-09-10 00:40:04,075 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 00:40:04,518 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=SOLUSDT&interval=1h&limit=200 HTTP/1.1" 200 None
+2025-09-10 00:40:04,528 - enhanced_realtime_monitor - INFO - ✅ SOLUSDT 历史数据加载完成: 200 根K线
+2025-09-10 00:40:04,741 - enhanced_realtime_monitor - INFO - ✅ SOLUSDT 预加载完成: 200 根K线
+2025-09-10 00:40:05,050 - enhanced_realtime_monitor - INFO - 🎯 历史数据预加载完成，开始定时监控模式！
+2025-09-10 00:40:12,408 - matplotlib - DEBUG - matplotlib data path: d:\Chrome 下载\pompom\win_rate_test\.venv\Lib\site-packages\matplotlib\mpl-data
+2025-09-10 00:40:12,414 - matplotlib - DEBUG - CONFIGDIR=C:\Users\曾治丘\.matplotlib
+2025-09-10 00:40:12,417 - matplotlib - DEBUG - interactive is False
+2025-09-10 00:40:12,417 - matplotlib - DEBUG - platform is win32
+2025-09-10 00:40:12,535 - matplotlib - DEBUG - CACHEDIR=C:\Users\曾治丘\.matplotlib
+2025-09-10 00:40:12,562 - matplotlib.font_manager - DEBUG - Using fontManager instance from C:\Users\曾治丘\.matplotlib\fontlist-v390.json
+2025-09-10 00:40:12,775 - matplotlib.pyplot - DEBUG - Loaded backend tkagg version 8.6.
+2025-09-10 00:40:12,775 - matplotlib.pyplot - DEBUG - Loaded backend agg version v2.2.
+2025-09-10 00:40:12,776 - matplotlib.pyplot - DEBUG - Loaded backend tkagg version 8.6.
+2025-09-10 00:55:09,215 - enhanced_realtime_monitor - INFO - 初始化监控器: webhook_url=https://n8n-ayzvkyda.ap-northeast-1.clawcloudrun.com/webhook/double_t_b, min_volume_24h=20000000
+2025-09-10 00:55:09,215 - enhanced_realtime_monitor - INFO - API认证已配置: api_key=lXsXOr3L...
+2025-09-10 00:55:09,215 - enhanced_realtime_monitor - INFO - 使用币安API定期获取数据，无需WebSocket连接
+2025-09-10 00:55:09,220 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 00:55:09,223 - enhanced_realtime_monitor - INFO - 🚀 开始增强版定时信号监控...
+2025-09-10 00:55:09,223 - enhanced_realtime_monitor - INFO - 🔄 使用固定的备用交易对列表
+2025-09-10 00:55:09,223 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 00:55:09,223 - enhanced_realtime_monitor - INFO - 📊 备用列表状态: 使用 5 个交易对
+2025-09-10 00:55:09,225 - enhanced_realtime_monitor - INFO - 📡 将监控 5 个动态备用交易对
+2025-09-10 00:55:09,225 - enhanced_realtime_monitor - INFO - 📊 开始预加载历史数据...
+2025-09-10 00:55:09,225 - enhanced_realtime_monitor - DEBUG - 获取 SOLUSDT 历史数据: 200 根K线
+2025-09-10 00:55:09,226 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 00:55:09,228 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 00:55:09,228 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-09-10 00:55:09,229 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 00:55:09,230 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 00:55:09,293 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 00:55:09,297 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 00:55:09,346 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 00:55:09,346 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 00:55:09,432 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 00:55:09,529 - httpcore.connection - DEBUG - connect_tcp.started host='api.gradio.app' port=443 local_address=None timeout=3 socket_options=None
+2025-09-10 00:55:09,541 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x0000019B1A265350>
+2025-09-10 00:55:09,541 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x0000019B1A4EA960> server_hostname='api.gradio.app' timeout=3
+2025-09-10 00:55:09,722 - httpcore.connection - DEBUG - connect_tcp.started host='localhost' port=7860 local_address=None timeout=None socket_options=None
+2025-09-10 00:55:09,809 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=SOLUSDT&interval=1h&limit=200 HTTP/1.1" 200 None
+2025-09-10 00:55:09,821 - enhanced_realtime_monitor - INFO - ✅ SOLUSDT 历史数据加载完成: 200 根K线
+2025-09-10 00:55:09,923 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /api/telemetry/gradio/initiated HTTP/1.1" 200 0
+2025-09-10 00:55:10,033 - enhanced_realtime_monitor - INFO - ✅ SOLUSDT 预加载完成: 200 根K线
+2025-09-10 00:55:10,336 - enhanced_realtime_monitor - DEBUG - 获取 ETHUSDT 历史数据: 200 根K线
+2025-09-10 00:55:10,338 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 00:55:10,416 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x0000019B1A21DC50>
+2025-09-10 00:55:10,417 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'GET']>
+2025-09-10 00:55:10,417 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-10 00:55:10,417 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'GET']>
+2025-09-10 00:55:10,418 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-10 00:55:10,418 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'GET']>
+2025-09-10 00:55:10,680 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Tue, 09 Sep 2025 16:55:09 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'21'), (b'Connection', b'keep-alive'), (b'Server', b'nginx/1.18.0'), (b'Access-Control-Allow-Origin', b'*')])
+2025-09-10 00:55:10,681 - httpx - INFO - HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2025-09-10 00:55:10,681 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'GET']>
+2025-09-10 00:55:10,681 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-10 00:55:10,681 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-10 00:55:10,682 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-10 00:55:10,682 - httpcore.connection - DEBUG - close.started
+2025-09-10 00:55:10,683 - httpcore.connection - DEBUG - close.complete
+2025-09-10 00:55:10,835 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=ETHUSDT&interval=1h&limit=200 HTTP/1.1" 200 None
+2025-09-10 00:55:10,847 - enhanced_realtime_monitor - INFO - ✅ ETHUSDT 历史数据加载完成: 200 根K线
+2025-09-10 00:55:11,059 - enhanced_realtime_monitor - INFO - ✅ ETHUSDT 预加载完成: 200 根K线
+2025-09-10 00:55:11,363 - enhanced_realtime_monitor - DEBUG - 获取 BNBUSDT 历史数据: 200 根K线
+2025-09-10 00:55:11,365 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 00:55:11,748 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x0000019B1AD65850>
+2025-09-10 00:55:11,748 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'GET']>
+2025-09-10 00:55:11,748 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-10 00:55:11,751 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'GET']>
+2025-09-10 00:55:11,751 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-10 00:55:11,751 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'GET']>
+2025-09-10 00:55:11,751 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'date', b'Tue, 09 Sep 2025 16:55:11 GMT'), (b'server', b'uvicorn'), (b'content-length', b'4'), (b'content-type', b'application/json')])
+2025-09-10 00:55:11,751 - httpx - INFO - HTTP Request: GET http://localhost:7860/gradio_api/startup-events "HTTP/1.1 200 OK"
+2025-09-10 00:55:11,751 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'GET']>
+2025-09-10 00:55:11,751 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-10 00:55:11,751 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-10 00:55:11,751 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-10 00:55:11,751 - httpcore.connection - DEBUG - close.started
+2025-09-10 00:55:11,751 - httpcore.connection - DEBUG - close.complete
+2025-09-10 00:55:11,753 - httpcore.connection - DEBUG - connect_tcp.started host='localhost' port=7860 local_address=None timeout=3 socket_options=None
+2025-09-10 00:55:11,804 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=BNBUSDT&interval=1h&limit=200 HTTP/1.1" 200 None
+2025-09-10 00:55:11,814 - enhanced_realtime_monitor - INFO - ✅ BNBUSDT 历史数据加载完成: 200 根K线
+2025-09-10 00:55:12,026 - enhanced_realtime_monitor - INFO - ✅ BNBUSDT 预加载完成: 200 根K线
+2025-09-10 00:55:12,331 - enhanced_realtime_monitor - DEBUG - 获取 ADAUSDT 历史数据: 200 根K线
+2025-09-10 00:55:12,333 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 00:55:12,775 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=ADAUSDT&interval=1h&limit=200 HTTP/1.1" 200 None
+2025-09-10 00:55:12,787 - enhanced_realtime_monitor - INFO - ✅ ADAUSDT 历史数据加载完成: 200 根K线
+2025-09-10 00:55:12,993 - enhanced_realtime_monitor - INFO - ✅ ADAUSDT 预加载完成: 200 根K线
+2025-09-10 00:55:13,301 - enhanced_realtime_monitor - DEBUG - 获取 BTCUSDT 历史数据: 200 根K线
+2025-09-10 00:55:13,302 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 00:55:13,727 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=BTCUSDT&interval=1h&limit=200 HTTP/1.1" 200 None
+2025-09-10 00:55:13,738 - enhanced_realtime_monitor - INFO - ✅ BTCUSDT 历史数据加载完成: 200 根K线
+2025-09-10 00:55:13,777 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x0000019B1A184BD0>
+2025-09-10 00:55:13,778 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'HEAD']>
+2025-09-10 00:55:13,778 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-10 00:55:13,780 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'HEAD']>
+2025-09-10 00:55:13,780 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-10 00:55:13,780 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'HEAD']>
+2025-09-10 00:55:13,847 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'date', b'Tue, 09 Sep 2025 16:55:13 GMT'), (b'server', b'uvicorn'), (b'content-length', b'15525'), (b'content-type', b'text/html; charset=utf-8')])
+2025-09-10 00:55:13,848 - httpx - INFO - HTTP Request: HEAD http://localhost:7860/ "HTTP/1.1 200 OK"
+2025-09-10 00:55:13,848 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'HEAD']>
+2025-09-10 00:55:13,848 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-10 00:55:13,848 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-10 00:55:13,849 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-10 00:55:13,849 - httpcore.connection - DEBUG - close.started
+2025-09-10 00:55:13,849 - httpcore.connection - DEBUG - close.complete
+2025-09-10 00:55:13,852 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-09-10 00:55:13,940 - enhanced_realtime_monitor - INFO - ✅ BTCUSDT 预加载完成: 200 根K线
+2025-09-10 00:55:14,249 - enhanced_realtime_monitor - INFO - 🎯 历史数据预加载完成，开始定时监控模式！
+2025-09-10 00:55:14,672 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /api/telemetry/gradio/launched HTTP/1.1" 200 0
+2025-09-10 01:00:04,330 - enhanced_realtime_monitor - INFO - 定时触发: 2025-09-10 01:00:04
+2025-09-10 01:00:04,331 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 01:00:04,853 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=SOLUSDT&interval=1h&limit=2&timestamp=1757437204330&signature=969987eb273311ca5a70cc0c270eb836b40c78801e2a1c913e8aaca8879632d9 HTTP/1.1" 200 None
+2025-09-10 01:00:04,855 - enhanced_realtime_monitor - ERROR - ❌ SOLUSDT API获取失败: 'open_time'
+2025-09-10 01:00:04,856 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 01:00:05,539 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=ETHUSDT&interval=1h&limit=2&timestamp=1757437204855&signature=547669ce92b6a94693cd2b0b8a8aa611eadd7bbde80f1c7d0968ae3a78407f1f HTTP/1.1" 200 None
+2025-09-10 01:00:05,541 - enhanced_realtime_monitor - ERROR - ❌ ETHUSDT API获取失败: 'open_time'
+2025-09-10 01:00:05,542 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 01:00:06,035 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=BNBUSDT&interval=1h&limit=2&timestamp=1757437205541&signature=45b0903bf08d005ddb734c99e49c47461ea04483f092eb949ac08a95490b5a5a HTTP/1.1" 200 None
+2025-09-10 01:00:06,038 - enhanced_realtime_monitor - ERROR - ❌ BNBUSDT API获取失败: 'open_time'
+2025-09-10 01:00:06,039 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 01:00:06,491 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=ADAUSDT&interval=1h&limit=2&timestamp=1757437206038&signature=911b0e16aacb6a9b0b9ce71c314e39cba521ca804373295e095da4211f02f52a HTTP/1.1" 200 None
+2025-09-10 01:00:06,493 - enhanced_realtime_monitor - ERROR - ❌ ADAUSDT API获取失败: 'open_time'
+2025-09-10 01:00:06,494 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 01:00:06,963 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=BTCUSDT&interval=1h&limit=2&timestamp=1757437206493&signature=9f3d15503fa4524a085b42d8426a2bcd6f0b18c8b3152f689a5c7e4a3fe73c51 HTTP/1.1" 200 None
+2025-09-10 01:00:06,966 - enhanced_realtime_monitor - ERROR - ❌ BTCUSDT API获取失败: 'open_time'
+2025-09-10 01:00:06,966 - enhanced_realtime_monitor - INFO - API数据获取完成: 处理 0 个交易对, 发现 0 个信号
+2025-09-10 01:03:13,920 - enhanced_realtime_monitor - INFO - 初始化监控器: webhook_url=https://n8n-ayzvkyda.ap-northeast-1.clawcloudrun.com/webhook/double_t_b, min_volume_24h=20000000
+2025-09-10 01:03:13,920 - enhanced_realtime_monitor - INFO - API认证已配置: api_key=lXsXOr3L...
+2025-09-10 01:03:13,920 - enhanced_realtime_monitor - INFO - 使用币安API定期获取数据，无需WebSocket连接
+2025-09-10 01:03:13,921 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 01:03:13,926 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 01:03:13,926 - enhanced_realtime_monitor - INFO - 🚀 开始增强版定时信号监控...
+2025-09-10 01:03:13,926 - enhanced_realtime_monitor - INFO - 🔄 使用固定的备用交易对列表
+2025-09-10 01:03:13,926 - enhanced_realtime_monitor - INFO - 📊 备用列表状态: 使用 5 个交易对
+2025-09-10 01:03:13,927 - enhanced_realtime_monitor - INFO - 📡 将监控 5 个动态备用交易对
+2025-09-10 01:03:13,927 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 01:03:13,927 - enhanced_realtime_monitor - INFO - 📊 开始预加载历史数据...
+2025-09-10 01:03:13,928 - enhanced_realtime_monitor - DEBUG - 获取 ADAUSDT 历史数据: 200 根K线
+2025-09-10 01:03:13,929 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-09-10 01:03:13,931 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 01:03:13,931 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 01:03:13,931 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 01:03:13,994 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 01:03:13,994 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 01:03:14,045 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 01:03:14,045 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 01:03:14,114 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 01:03:14,183 - httpcore.connection - DEBUG - connect_tcp.started host='api.gradio.app' port=443 local_address=None timeout=3 socket_options=None
+2025-09-10 01:03:14,273 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x000001D1DD2ED390>
+2025-09-10 01:03:14,273 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x000001D1DD696570> server_hostname='api.gradio.app' timeout=3
+2025-09-10 01:03:14,378 - httpcore.connection - DEBUG - connect_tcp.started host='localhost' port=7860 local_address=None timeout=None socket_options=None
+2025-09-10 01:03:14,509 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=ADAUSDT&interval=1h&limit=200 HTTP/1.1" 200 None
+2025-09-10 01:03:14,523 - enhanced_realtime_monitor - INFO - ✅ ADAUSDT 历史数据加载完成: 200 根K线
+2025-09-10 01:03:14,711 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /api/telemetry/gradio/initiated HTTP/1.1" 200 0
+2025-09-10 01:03:14,727 - enhanced_realtime_monitor - INFO - ✅ ADAUSDT 预加载完成: 200 根K线
+2025-09-10 01:03:15,036 - enhanced_realtime_monitor - DEBUG - 获取 BNBUSDT 历史数据: 200 根K线
+2025-09-10 01:03:15,037 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 01:03:15,145 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x000001D1DD5F2850>
+2025-09-10 01:03:15,145 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'GET']>
+2025-09-10 01:03:15,147 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-10 01:03:15,148 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'GET']>
+2025-09-10 01:03:15,148 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-10 01:03:15,148 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'GET']>
+2025-09-10 01:03:15,672 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Tue, 09 Sep 2025 17:03:14 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'21'), (b'Connection', b'keep-alive'), (b'Server', b'nginx/1.18.0'), (b'Access-Control-Allow-Origin', b'*')])
+2025-09-10 01:03:15,673 - httpx - INFO - HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+2025-09-10 01:03:15,673 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'GET']>
+2025-09-10 01:03:15,673 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-10 01:03:15,674 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-10 01:03:15,674 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-10 01:03:15,674 - httpcore.connection - DEBUG - close.started
+2025-09-10 01:03:15,674 - httpcore.connection - DEBUG - close.complete
+2025-09-10 01:03:15,908 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=BNBUSDT&interval=1h&limit=200 HTTP/1.1" 200 None
+2025-09-10 01:03:15,919 - enhanced_realtime_monitor - INFO - ✅ BNBUSDT 历史数据加载完成: 200 根K线
+2025-09-10 01:03:16,131 - enhanced_realtime_monitor - INFO - ✅ BNBUSDT 预加载完成: 200 根K线
+2025-09-10 01:03:16,402 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x000001D1DDC76D10>
+2025-09-10 01:03:16,402 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'GET']>
+2025-09-10 01:03:16,402 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-10 01:03:16,402 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'GET']>
+2025-09-10 01:03:16,402 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-10 01:03:16,402 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'GET']>
+2025-09-10 01:03:16,402 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'date', b'Tue, 09 Sep 2025 17:03:16 GMT'), (b'server', b'uvicorn'), (b'content-length', b'4'), (b'content-type', b'application/json')])
+2025-09-10 01:03:16,402 - httpx - INFO - HTTP Request: GET http://localhost:7860/gradio_api/startup-events "HTTP/1.1 200 OK"
+2025-09-10 01:03:16,406 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'GET']>
+2025-09-10 01:03:16,406 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-10 01:03:16,406 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-10 01:03:16,406 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-10 01:03:16,406 - httpcore.connection - DEBUG - close.started
+2025-09-10 01:03:16,406 - httpcore.connection - DEBUG - close.complete
+2025-09-10 01:03:16,407 - httpcore.connection - DEBUG - connect_tcp.started host='localhost' port=7860 local_address=None timeout=3 socket_options=None
+2025-09-10 01:03:16,444 - enhanced_realtime_monitor - DEBUG - 获取 ETHUSDT 历史数据: 200 根K线
+2025-09-10 01:03:16,445 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 01:03:17,217 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=ETHUSDT&interval=1h&limit=200 HTTP/1.1" 200 None
+2025-09-10 01:03:17,229 - enhanced_realtime_monitor - INFO - ✅ ETHUSDT 历史数据加载完成: 200 根K线
+2025-09-10 01:03:17,437 - enhanced_realtime_monitor - INFO - ✅ ETHUSDT 预加载完成: 200 根K线
+2025-09-10 01:03:17,746 - enhanced_realtime_monitor - DEBUG - 获取 BTCUSDT 历史数据: 200 根K线
+2025-09-10 01:03:17,748 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 01:03:18,458 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x000001D1DD647110>
+2025-09-10 01:03:18,458 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'HEAD']>
+2025-09-10 01:03:18,459 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-09-10 01:03:18,459 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'HEAD']>
+2025-09-10 01:03:18,460 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-09-10 01:03:18,460 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'HEAD']>
+2025-09-10 01:03:18,531 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'date', b'Tue, 09 Sep 2025 17:03:18 GMT'), (b'server', b'uvicorn'), (b'content-length', b'15525'), (b'content-type', b'text/html; charset=utf-8')])
+2025-09-10 01:03:18,531 - httpx - INFO - HTTP Request: HEAD http://localhost:7860/ "HTTP/1.1 200 OK"
+2025-09-10 01:03:18,531 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'HEAD']>
+2025-09-10 01:03:18,532 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-09-10 01:03:18,532 - httpcore.http11 - DEBUG - response_closed.started
+2025-09-10 01:03:18,532 - httpcore.http11 - DEBUG - response_closed.complete
+2025-09-10 01:03:18,532 - httpcore.connection - DEBUG - close.started
+2025-09-10 01:03:18,533 - httpcore.connection - DEBUG - close.complete
+2025-09-10 01:03:18,535 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-09-10 01:03:18,602 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=BTCUSDT&interval=1h&limit=200 HTTP/1.1" 200 None
+2025-09-10 01:03:18,613 - enhanced_realtime_monitor - INFO - ✅ BTCUSDT 历史数据加载完成: 200 根K线
+2025-09-10 01:03:18,819 - enhanced_realtime_monitor - INFO - ✅ BTCUSDT 预加载完成: 200 根K线
+2025-09-10 01:03:19,132 - enhanced_realtime_monitor - DEBUG - 获取 SOLUSDT 历史数据: 200 根K线
+2025-09-10 01:03:19,134 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 01:03:19,160 - urllib3.connectionpool - DEBUG - https://huggingface.co:443 "HEAD /api/telemetry/gradio/launched HTTP/1.1" 200 0
+2025-09-10 01:03:19,620 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=SOLUSDT&interval=1h&limit=200 HTTP/1.1" 200 None
+2025-09-10 01:03:19,632 - enhanced_realtime_monitor - INFO - ✅ SOLUSDT 历史数据加载完成: 200 根K线
+2025-09-10 01:03:19,847 - enhanced_realtime_monitor - INFO - ✅ SOLUSDT 预加载完成: 200 根K线
+2025-09-10 01:03:20,163 - enhanced_realtime_monitor - INFO - 🎯 历史数据预加载完成，开始定时监控模式！
+2025-09-10 01:39:17,914 - __main__ - INFO - 初始化监控器: webhook_url=https://n8n-ayzvkyda.ap-northeast-1.clawcloudrun.com/webhook/double_t_b, min_volume_24h=20000000
+2025-09-10 01:39:17,914 - __main__ - INFO - API认证已配置: api_key=lXsXOr3L...
+2025-09-10 01:39:17,914 - __main__ - INFO - 使用币安API定期获取数据，无需WebSocket连接
+2025-09-10 01:39:17,914 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 01:39:17,914 - __main__ - INFO - 🚀 开始增强版定时信号监控...
+2025-09-10 01:39:17,914 - __main__ - INFO - 🔄 使用固定的备用交易对列表
+2025-09-10 01:39:17,914 - __main__ - INFO - 📊 备用列表状态: 使用 5 个交易对
+2025-09-10 01:39:17,914 - __main__ - INFO - 📡 将监控 5 个动态备用交易对
+2025-09-10 01:39:17,914 - __main__ - INFO - 📊 开始预加载历史数据...
+2025-09-10 01:39:17,914 - __main__ - DEBUG - 获取 BTCUSDT 历史数据: 200 根K线
+2025-09-10 01:39:17,914 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 01:39:18,421 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=BTCUSDT&interval=1h&limit=200 HTTP/1.1" 200 None
+2025-09-10 01:39:18,432 - __main__ - INFO - ✅ BTCUSDT 历史数据加载完成: 200 根K线
+2025-09-10 01:39:18,639 - __main__ - INFO - ✅ BTCUSDT 预加载完成: 200 根K线
+2025-09-10 01:39:18,955 - __main__ - DEBUG - 获取 ETHUSDT 历史数据: 200 根K线
+2025-09-10 01:39:18,956 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 01:39:19,360 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=ETHUSDT&interval=1h&limit=200 HTTP/1.1" 200 None
+2025-09-10 01:39:19,370 - __main__ - INFO - ✅ ETHUSDT 历史数据加载完成: 200 根K线
+2025-09-10 01:39:19,573 - __main__ - INFO - ✅ ETHUSDT 预加载完成: 200 根K线
+2025-09-10 01:39:19,887 - __main__ - DEBUG - 获取 BNBUSDT 历史数据: 200 根K线
+2025-09-10 01:39:19,889 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 01:39:20,307 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=BNBUSDT&interval=1h&limit=200 HTTP/1.1" 200 None
+2025-09-10 01:39:20,321 - __main__ - INFO - ✅ BNBUSDT 历史数据加载完成: 200 根K线
+2025-09-10 01:39:20,538 - __main__ - INFO - ✅ BNBUSDT 预加载完成: 200 根K线
+2025-09-10 01:39:20,844 - __main__ - DEBUG - 获取 ADAUSDT 历史数据: 200 根K线
+2025-09-10 01:39:20,845 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 01:39:21,276 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=ADAUSDT&interval=1h&limit=200 HTTP/1.1" 200 None
+2025-09-10 01:39:21,287 - __main__ - INFO - ✅ ADAUSDT 历史数据加载完成: 200 根K线
+2025-09-10 01:39:21,500 - __main__ - INFO - ✅ ADAUSDT 预加载完成: 200 根K线
+2025-09-10 01:39:21,803 - __main__ - DEBUG - 获取 SOLUSDT 历史数据: 200 根K线
+2025-09-10 01:39:21,803 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 01:39:22,252 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=SOLUSDT&interval=1h&limit=200 HTTP/1.1" 200 None
+2025-09-10 01:39:22,265 - __main__ - INFO - ✅ SOLUSDT 历史数据加载完成: 200 根K线
+2025-09-10 01:39:22,469 - __main__ - INFO - ✅ SOLUSDT 预加载完成: 200 根K线
+2025-09-10 01:39:22,778 - __main__ - INFO - 🎯 历史数据预加载完成，开始定时监控模式！
+2025-09-10 01:39:39,271 - __main__ - INFO - 监控已停止
+2025-09-10 02:03:48,611 - __main__ - INFO - 初始化监控器: webhook_url=https://n8n-ayzvkyda.ap-northeast-1.clawcloudrun.com/webhook/double_t_b, min_volume_24h=20000000
+2025-09-10 02:03:48,612 - __main__ - INFO - API认证已配置: api_key=lXsXOr3L...
+2025-09-10 02:03:48,612 - __main__ - INFO - 使用币安API定期获取数据，无需WebSocket连接
+2025-09-10 02:03:48,612 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 02:03:48,613 - __main__ - INFO - 🚀 开始增强版定时信号监控...
+2025-09-10 02:03:48,613 - __main__ - INFO - 🔄 使用固定的备用交易对列表
+2025-09-10 02:03:48,613 - __main__ - INFO - 📊 备用列表状态: 使用 5 个交易对
+2025-09-10 02:03:48,614 - __main__ - INFO - 📡 将监控 5 个动态备用交易对
+2025-09-10 02:03:48,614 - __main__ - INFO - 📊 开始预加载历史数据...
+2025-09-10 02:03:48,614 - __main__ - DEBUG - 获取 BTCUSDT 历史数据: 200 根K线
+2025-09-10 02:03:48,617 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 02:03:49,129 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=BTCUSDT&interval=1h&limit=200 HTTP/1.1" 200 None
+2025-09-10 02:03:49,140 - __main__ - INFO - ✅ BTCUSDT 历史数据加载完成: 200 根K线
+2025-09-10 02:03:49,351 - __main__ - INFO - ✅ BTCUSDT 预加载完成: 200 根K线
+2025-09-10 02:03:49,660 - __main__ - DEBUG - 获取 SOLUSDT 历史数据: 200 根K线
+2025-09-10 02:03:49,661 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 02:03:50,078 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=SOLUSDT&interval=1h&limit=200 HTTP/1.1" 200 None
+2025-09-10 02:03:50,088 - __main__ - INFO - ✅ SOLUSDT 历史数据加载完成: 200 根K线
+2025-09-10 02:03:50,292 - __main__ - INFO - ✅ SOLUSDT 预加载完成: 200 根K线
+2025-09-10 02:03:50,600 - __main__ - DEBUG - 获取 BNBUSDT 历史数据: 200 根K线
+2025-09-10 02:03:50,601 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 02:03:51,046 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=BNBUSDT&interval=1h&limit=200 HTTP/1.1" 200 None
+2025-09-10 02:03:51,059 - __main__ - INFO - ✅ BNBUSDT 历史数据加载完成: 200 根K线
+2025-09-10 02:03:51,270 - __main__ - INFO - ✅ BNBUSDT 预加载完成: 200 根K线
+2025-09-10 02:03:51,573 - __main__ - DEBUG - 获取 ADAUSDT 历史数据: 200 根K线
+2025-09-10 02:03:51,573 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 02:03:52,018 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=ADAUSDT&interval=1h&limit=200 HTTP/1.1" 200 None
+2025-09-10 02:03:52,029 - __main__ - INFO - ✅ ADAUSDT 历史数据加载完成: 200 根K线
+2025-09-10 02:03:52,232 - __main__ - INFO - ✅ ADAUSDT 预加载完成: 200 根K线
+2025-09-10 02:03:52,539 - __main__ - DEBUG - 获取 ETHUSDT 历史数据: 200 根K线
+2025-09-10 02:03:52,540 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 02:03:52,971 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=ETHUSDT&interval=1h&limit=200 HTTP/1.1" 200 None
+2025-09-10 02:03:52,982 - __main__ - INFO - ✅ ETHUSDT 历史数据加载完成: 200 根K线
+2025-09-10 02:03:53,188 - __main__ - INFO - ✅ ETHUSDT 预加载完成: 200 根K线
+2025-09-10 02:03:53,500 - __main__ - INFO - 🎯 历史数据预加载完成，开始定时监控模式！
+2025-09-10 02:03:58,412 - __main__ - INFO - 监控已停止
+2025-09-10 02:59:06,222 - __main__ - INFO - 初始化监控器: webhook_url=https://n8n-ayzvkyda.ap-northeast-1.clawcloudrun.com/webhook/double_t_b, min_volume_24h=20000000
+2025-09-10 02:59:06,222 - __main__ - INFO - API认证已配置: api_key=lXsXOr3L...
+2025-09-10 02:59:06,222 - __main__ - INFO - 使用币安API定期获取数据，无需WebSocket连接
+2025-09-10 02:59:06,222 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 02:59:06,224 - __main__ - INFO - 🚀 开始增强版定时信号监控...
+2025-09-10 02:59:06,224 - __main__ - INFO - 🔄 使用固定的备用交易对列表
+2025-09-10 02:59:06,224 - __main__ - INFO - 📊 备用列表状态: 使用 5 个交易对
+2025-09-10 02:59:06,224 - __main__ - INFO - 📡 将监控 5 个动态备用交易对
+2025-09-10 02:59:06,224 - __main__ - INFO - 📊 开始预加载历史数据...
+2025-09-10 02:59:06,224 - __main__ - DEBUG - [健康检查] 开始检查 binance 数据源健康状态
+2025-09-10 02:59:06,229 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 02:59:06,710 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/ping HTTP/1.1" 200 2
+2025-09-10 02:59:06,711 - __main__ - DEBUG - [健康检查] Binance API 状态: 健康
+2025-09-10 02:59:06,712 - __main__ - DEBUG - [Binance] 获取 ETHUSDT 历史数据: 200 根K线
+2025-09-10 02:59:06,714 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 02:59:07,259 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=ETHUSDT&interval=1h&limit=200 HTTP/1.1" 200 None
+2025-09-10 02:59:07,270 - __main__ - INFO - ✅ [Binance] ETHUSDT 历史数据加载完成: 200 根K线
+2025-09-10 02:59:07,481 - __main__ - DEBUG - [数据获取] 成功从 binance 获取 200 条K线数据
+2025-09-10 02:59:07,481 - __main__ - INFO - ✅ ETHUSDT 预加载完成: 200 根K线
+2025-09-10 02:59:07,784 - __main__ - DEBUG - [Binance] 获取 ADAUSDT 历史数据: 200 根K线
+2025-09-10 02:59:07,787 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 02:59:08,220 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=ADAUSDT&interval=1h&limit=200 HTTP/1.1" 200 None
+2025-09-10 02:59:08,234 - __main__ - INFO - ✅ [Binance] ADAUSDT 历史数据加载完成: 200 根K线
+2025-09-10 02:59:08,436 - __main__ - DEBUG - [数据获取] 成功从 binance 获取 200 条K线数据
+2025-09-10 02:59:08,436 - __main__ - INFO - ✅ ADAUSDT 预加载完成: 200 根K线
+2025-09-10 02:59:08,738 - __main__ - DEBUG - [Binance] 获取 SOLUSDT 历史数据: 200 根K线
+2025-09-10 02:59:08,739 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 02:59:09,150 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=SOLUSDT&interval=1h&limit=200 HTTP/1.1" 200 None
+2025-09-10 02:59:09,159 - __main__ - INFO - ✅ [Binance] SOLUSDT 历史数据加载完成: 200 根K线
+2025-09-10 02:59:09,375 - __main__ - DEBUG - [数据获取] 成功从 binance 获取 200 条K线数据
+2025-09-10 02:59:09,377 - __main__ - INFO - ✅ SOLUSDT 预加载完成: 200 根K线
+2025-09-10 02:59:09,687 - __main__ - DEBUG - [Binance] 获取 BNBUSDT 历史数据: 200 根K线
+2025-09-10 02:59:09,689 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 02:59:10,111 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=BNBUSDT&interval=1h&limit=200 HTTP/1.1" 200 None
+2025-09-10 02:59:10,122 - __main__ - INFO - ✅ [Binance] BNBUSDT 历史数据加载完成: 200 根K线
+2025-09-10 02:59:10,329 - __main__ - DEBUG - [数据获取] 成功从 binance 获取 200 条K线数据
+2025-09-10 02:59:10,329 - __main__ - INFO - ✅ BNBUSDT 预加载完成: 200 根K线
+2025-09-10 02:59:10,631 - __main__ - DEBUG - [Binance] 获取 BTCUSDT 历史数据: 200 根K线
+2025-09-10 02:59:10,632 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 02:59:11,065 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=BTCUSDT&interval=1h&limit=200 HTTP/1.1" 200 None
+2025-09-10 02:59:11,076 - __main__ - INFO - ✅ [Binance] BTCUSDT 历史数据加载完成: 200 根K线
+2025-09-10 02:59:11,279 - __main__ - DEBUG - [数据获取] 成功从 binance 获取 200 条K线数据
+2025-09-10 02:59:11,280 - __main__ - INFO - ✅ BTCUSDT 预加载完成: 200 根K线
+2025-09-10 02:59:11,583 - __main__ - INFO - 🎯 历史数据预加载完成，开始定时监控模式！
+2025-09-10 03:00:01,616 - __main__ - INFO - 定时触发: 2025-09-10 03:00:01
+2025-09-10 03:00:01,616 - __main__ - DEBUG - [Binance] 获取 ETHUSDT 历史数据: 2 根K线
+2025-09-10 03:00:01,618 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 03:00:02,500 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=ETHUSDT&interval=1h&limit=2 HTTP/1.1" 200 None
+2025-09-10 03:00:02,501 - __main__ - INFO - ✅ [Binance] ETHUSDT 历史数据加载完成: 2 根K线
+2025-09-10 03:00:02,706 - __main__ - DEBUG - [数据获取] 成功从 binance 获取 2 条K线数据
+2025-09-10 03:00:02,707 - __main__ - ERROR - ❌ ETHUSDT API获取失败: 'open_time'
+2025-09-10 03:00:02,707 - __main__ - DEBUG - [Binance] 获取 ADAUSDT 历史数据: 2 根K线
+2025-09-10 03:00:02,709 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 03:00:03,260 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=ADAUSDT&interval=1h&limit=2 HTTP/1.1" 200 None
+2025-09-10 03:00:03,261 - __main__ - INFO - ✅ [Binance] ADAUSDT 历史数据加载完成: 2 根K线
+2025-09-10 03:00:03,475 - __main__ - DEBUG - [数据获取] 成功从 binance 获取 2 条K线数据
+2025-09-10 03:00:03,476 - __main__ - ERROR - ❌ ADAUSDT API获取失败: 'open_time'
+2025-09-10 03:00:03,476 - __main__ - DEBUG - [Binance] 获取 SOLUSDT 历史数据: 2 根K线
+2025-09-10 03:00:03,477 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 03:00:04,074 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=SOLUSDT&interval=1h&limit=2 HTTP/1.1" 200 None
+2025-09-10 03:00:04,075 - __main__ - INFO - ✅ [Binance] SOLUSDT 历史数据加载完成: 2 根K线
+2025-09-10 03:00:04,279 - __main__ - DEBUG - [数据获取] 成功从 binance 获取 2 条K线数据
+2025-09-10 03:00:04,279 - __main__ - ERROR - ❌ SOLUSDT API获取失败: 'open_time'
+2025-09-10 03:00:04,279 - __main__ - DEBUG - [Binance] 获取 BNBUSDT 历史数据: 2 根K线
+2025-09-10 03:00:04,281 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 03:00:04,922 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=BNBUSDT&interval=1h&limit=2 HTTP/1.1" 200 None
+2025-09-10 03:00:04,923 - __main__ - INFO - ✅ [Binance] BNBUSDT 历史数据加载完成: 2 根K线
+2025-09-10 03:00:05,130 - __main__ - DEBUG - [数据获取] 成功从 binance 获取 2 条K线数据
+2025-09-10 03:00:05,130 - __main__ - ERROR - ❌ BNBUSDT API获取失败: 'open_time'
+2025-09-10 03:00:05,130 - __main__ - DEBUG - [Binance] 获取 BTCUSDT 历史数据: 2 根K线
+2025-09-10 03:00:05,132 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 03:00:05,664 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=BTCUSDT&interval=1h&limit=2 HTTP/1.1" 200 None
+2025-09-10 03:00:05,666 - __main__ - INFO - ✅ [Binance] BTCUSDT 历史数据加载完成: 2 根K线
+2025-09-10 03:00:05,881 - __main__ - DEBUG - [数据获取] 成功从 binance 获取 2 条K线数据
+2025-09-10 03:00:05,881 - __main__ - ERROR - ❌ BTCUSDT API获取失败: 'open_time'
+2025-09-10 03:00:05,881 - __main__ - INFO - API数据获取完成: 处理 0 个交易对, 发现 0 个信号, 失败 5 个 (数据源: binance)
+2025-09-10 03:03:52,077 - __main__ - INFO - 初始化监控器: webhook_url=https://n8n-ayzvkyda.ap-northeast-1.clawcloudrun.com/webhook/double_t_b, min_volume_24h=20000000
+2025-09-10 03:03:52,077 - __main__ - INFO - API认证已配置: api_key=lXsXOr3L...
+2025-09-10 03:03:52,077 - __main__ - INFO - 使用币安API定期获取数据，无需WebSocket连接
+2025-09-10 03:03:52,081 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-09-10 03:03:52,082 - __main__ - INFO - 🚀 开始增强版定时信号监控...
+2025-09-10 03:03:52,082 - __main__ - INFO - 🔄 使用固定的备用交易对列表
+2025-09-10 03:03:52,082 - __main__ - INFO - 📊 备用列表状态: 使用 5 个交易对
+2025-09-10 03:03:52,082 - __main__ - INFO - 📡 将监控 5 个动态备用交易对
+2025-09-10 03:03:52,082 - __main__ - INFO - 📊 开始预加载历史数据...
+2025-09-10 03:03:52,082 - __main__ - DEBUG - [健康检查] 开始检查 binance 数据源健康状态
+2025-09-10 03:03:52,086 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 03:03:52,548 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/ping HTTP/1.1" 200 2
+2025-09-10 03:03:52,549 - __main__ - DEBUG - [健康检查] Binance API 状态: 健康
+2025-09-10 03:03:52,550 - __main__ - DEBUG - [Binance] 获取 ETHUSDT 历史数据: 200 根K线
+2025-09-10 03:03:52,551 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 03:03:52,988 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=ETHUSDT&interval=1h&limit=200 HTTP/1.1" 200 None
+2025-09-10 03:03:52,999 - __main__ - INFO - ✅ [Binance] ETHUSDT 历史数据加载完成: 200 根K线
+2025-09-10 03:03:53,204 - __main__ - DEBUG - [数据获取] 成功从 binance 获取 200 条K线数据
+2025-09-10 03:03:53,205 - __main__ - INFO - ✅ ETHUSDT 预加载完成: 200 根K线
+2025-09-10 03:03:53,512 - __main__ - DEBUG - [Binance] 获取 BNBUSDT 历史数据: 200 根K线
+2025-09-10 03:03:53,513 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 03:03:53,959 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=BNBUSDT&interval=1h&limit=200 HTTP/1.1" 200 None
+2025-09-10 03:03:53,971 - __main__ - INFO - ✅ [Binance] BNBUSDT 历史数据加载完成: 200 根K线
+2025-09-10 03:03:54,177 - __main__ - DEBUG - [数据获取] 成功从 binance 获取 200 条K线数据
+2025-09-10 03:03:54,178 - __main__ - INFO - ✅ BNBUSDT 预加载完成: 200 根K线
+2025-09-10 03:03:54,481 - __main__ - DEBUG - [Binance] 获取 BTCUSDT 历史数据: 200 根K线
+2025-09-10 03:03:54,481 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 03:03:54,926 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=BTCUSDT&interval=1h&limit=200 HTTP/1.1" 200 None
+2025-09-10 03:03:54,937 - __main__ - INFO - ✅ [Binance] BTCUSDT 历史数据加载完成: 200 根K线
+2025-09-10 03:03:55,142 - __main__ - DEBUG - [数据获取] 成功从 binance 获取 200 条K线数据
+2025-09-10 03:03:55,142 - __main__ - INFO - ✅ BTCUSDT 预加载完成: 200 根K线
+2025-09-10 03:03:55,458 - __main__ - DEBUG - [Binance] 获取 SOLUSDT 历史数据: 200 根K线
+2025-09-10 03:03:55,460 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 03:03:55,891 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=SOLUSDT&interval=1h&limit=200 HTTP/1.1" 200 None
+2025-09-10 03:03:55,910 - __main__ - INFO - ✅ [Binance] SOLUSDT 历史数据加载完成: 200 根K线
+2025-09-10 03:03:56,117 - __main__ - DEBUG - [数据获取] 成功从 binance 获取 200 条K线数据
+2025-09-10 03:03:56,117 - __main__ - INFO - ✅ SOLUSDT 预加载完成: 200 根K线
+2025-09-10 03:03:56,431 - __main__ - DEBUG - [Binance] 获取 ADAUSDT 历史数据: 200 根K线
+2025-09-10 03:03:56,433 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): fapi.binance.com:443
+2025-09-10 03:03:56,864 - urllib3.connectionpool - DEBUG - https://fapi.binance.com:443 "GET /fapi/v1/klines?symbol=ADAUSDT&interval=1h&limit=200 HTTP/1.1" 200 None
+2025-09-10 03:03:56,874 - __main__ - INFO - ✅ [Binance] ADAUSDT 历史数据加载完成: 200 根K线
+2025-09-10 03:03:57,078 - __main__ - DEBUG - [数据获取] 成功从 binance 获取 200 条K线数据
+2025-09-10 03:03:57,078 - __main__ - INFO - ✅ ADAUSDT 预加载完成: 200 根K线
+2025-09-10 03:03:57,380 - __main__ - INFO - 🎯 历史数据预加载完成，开始定时监控模式！

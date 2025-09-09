@@ -1,0 +1,29 @@
+{
+  "name": "crypto-trading-simulator",
+  "version": "1.0.0",
+  "description": "加密货币交易模拟器 - 基于胜率和风险回报比的交易策略分析工具",
+  "main": "app.py",
+  "scripts": {
+    "dev": "python app.py",
+    "start": "python app.py"
+  },
+  "keywords": [
+    "crypto",
+    "trading",
+    "simulator",
+    "binance",
+    "technical-analysis",
+    "gradio",
+    "vercel"
+  ],
+  "author": "pouriaka",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pouriaka/win-rate-test.git"
+  },
+  "homepage": "https://github.com/pouriaka/win-rate-test#readme"
+}

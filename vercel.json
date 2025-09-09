@@ -1,0 +1,58 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "app.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "50mb",
+        "excludeFiles": [
+          ".venv/**",
+          "__pycache__/**",
+          "*.pyc",
+          "*.log",
+          ".env",
+          "README*.md",
+          "package.json",
+          ".vercelignore",
+          "test_*",
+          "*_test.py",
+          "tests/**",
+          ".git/**",
+          "node_modules/**",
+          "*.cache/**",
+          "build/**",
+          "dist/**",
+          ".next/**",
+          "public/**",
+          "static/**",
+          "assets/**",
+          "docs/**",
+          "examples/**",
+          "*.md",
+          "*.txt",
+          "*.json",
+          "package*.json",
+          "yarn.lock",
+          "*.lock",
+          "*.cfg",
+          "*.ini",
+          "*.toml",
+          "*.yaml",
+          "*.yml"
+        ]
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/app.py"
+    }
+  ],
+  "env": {
+    "PYTHONPATH": ".",
+    "GRADIO_SERVER_NAME": "0.0.0.0",
+    "GRADIO_SERVER_PORT": "7860"
+  }
+}

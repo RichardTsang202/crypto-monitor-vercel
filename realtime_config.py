@@ -26,7 +26,7 @@ SYMBOL_FILTER = {
 KLINE_CONFIG = {
     'timeframe': '1h',             # K线周期
     'buffer_size': 144,            # 数据缓冲区大小（满足EMA144计算需求）
-    'min_data_points': 50,         # 最少数据点数才开始分析
+    'min_data_points': 100,        # 最少数据点数才开始分析
 }
 
 # 技术指标参数
