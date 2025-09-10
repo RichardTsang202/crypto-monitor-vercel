@@ -1,0 +1,32 @@
+# 交易模拟器依赖包 - Vercel超轻量版本
+# 严格控制在50MB以内
+
+# 核心依赖 - 最小化版本
+requests>=2.28.0
+python-dotenv>=1.0.0
+websocket-client>=1.6.0
+
+# 轻量数据处理
+python-dateutil>=2.8.0
+
+# 基础Web框架
+flask>=2.3.0
+
+# JSON处理
+orjson>=3.8.0
+
+# 时间处理
+pytz>=2022.1
+
+# 多数据源API支持
+# CoinGecko API - 免费加密货币数据
+pycoingecko>=3.1.0
+
+# HTTP客户端增强 - 支持异步请求
+aiohttp>=3.8.0
+
+# 数据验证和解析
+pydantic>=2.0.0
+
+# 重试机制支持
+tenacity>=8.2.0

@@ -6,9 +6,15 @@ import sys
 from pathlib import Path
 import requests
 import json
-# import websocket  # 不再需要WebSocket
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
+import pandas as pd
+import numpy as np
+from collections import deque
+from dataclasses import dataclass
+from typing import Dict, List, Optional
+import traceback
+import logging
 
 # 添加当前目录到路径
 current_dir = Path(__file__).parent
@@ -41,8 +47,22 @@ from realtime_config import (
     HTTP_API_CONFIG, get_klines_url
 )
 
-# 轻量级配置 - 移除重型依赖
-IMPORT_ERROR = None
+# 配置日志
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+# 信号数据结构
+@dataclass
+class SignalData:
+    symbol: str
+    timestamp: datetime
+    price: float
+    pattern_type: str
+    trend_status: str
+    macd_divergence: bool
+    rsi_divergence: bool
+    volume_divergence: bool
+    candle_pattern: str
 
 class MonitorApp:
     def __init__(self):
@@ -51,10 +71,20 @@ class MonitorApp:
         self.is_running = False
         self.status_log = []
         self.signal_count = 0
+        self.pattern_count = 0
+        self.message_count = 0
         self.start_time = None
         self.active_symbols = []
         self.ws = None
         self.executor = ThreadPoolExecutor(max_workers=5)
+        
+        # K线数据缓冲区
+        self.kline_buffers = {}
+        self.buffer_size = KLINE_CONFIG['buffer_size']
+        
+        # Webhook配置
+        self.webhook_url = os.getenv('WEBHOOK_URL')
+        
         # 启动真实监控
         self.start_real_monitoring()
         
@@ -247,30 +277,413 @@ class MonitorApp:
         return None
     
     def _process_kline_data(self, symbol, kline):
-        """处理K线数据并生成信号"""
+        """处理K线数据并进行形态检测"""
         try:
-            # 提取K线数据
-            open_price = float(kline['o'])
-            high_price = float(kline['h'])
-            low_price = float(kline['l'])
-            close_price = float(kline['c'])
-            volume = float(kline['v'])
+            # 检查数据缓冲区是否存在
+            if symbol not in self.kline_buffers:
+                self.add_log(f"⚠️ {symbol} 数据缓冲区不存在，初始化空缓冲区")
+                self.kline_buffers[symbol] = deque(maxlen=self.buffer_size)
             
-            # 简单的信号检测逻辑（这里可以集成更复杂的技术分析）
-            price_change = (close_price - open_price) / open_price * 100
-            
-            # 生成信号的条件
-            if abs(price_change) > 2:  # 价格变动超过2%
-                signal_type = "突破信号" if price_change > 0 else "跌破信号"
-                self.signal_count += 1
-                self.add_log(f"📈 {symbol}: {signal_type} (变动: {price_change:.2f}%)")
+            # 转换K线数据格式 - 兼容不同的数据源格式
+            if isinstance(kline, dict):
+                # WebSocket格式或已转换格式
+                if 't' in kline:
+                    timestamp = pd.to_datetime(int(kline['t']), unit='ms')
+                else:
+                    timestamp = pd.to_datetime(datetime.now())
                 
-                # 这里可以添加webhook通知逻辑
-                self._send_webhook_notification(symbol, signal_type, price_change, close_price)
+                kline_data = {
+                    'timestamp': timestamp,
+                    'open': float(kline['o']),
+                    'high': float(kline['h']),
+                    'low': float(kline['l']),
+                    'close': float(kline['c']),
+                    'volume': float(kline['v'])
+                }
+            else:
+                # 数组格式 [timestamp, open, high, low, close, volume, ...]
+                kline_data = {
+                    'timestamp': pd.to_datetime(int(kline[0]), unit='ms'),
+                    'open': float(kline[1]),
+                    'high': float(kline[2]),
+                    'low': float(kline[3]),
+                    'close': float(kline[4]),
+                    'volume': float(kline[5])
+                }
+            
+            # 添加到缓冲区
+            self.kline_buffers[symbol].append(kline_data)
+            buffer_len = len(self.kline_buffers[symbol])
+            
+            self.add_log(f"✅ {symbol} K线已添加，缓存: {buffer_len}/{self.buffer_size}")
+            self.message_count += 1
+            
+            # 需要至少100根K线进行形态识别
+            if buffer_len < 100:
+                self.add_log(f"⚠️ {symbol} 数据不足，跳过分析 ({buffer_len}/100)")
+                return
+            
+            # 转换为DataFrame进行技术分析
+            df = pd.DataFrame(list(self.kline_buffers[symbol]))
+            df.set_index('timestamp', inplace=True)
+            
+            # 计算基础指标
+            df = self.calculate_basic_indicators(df)
+            
+            # 进行形态检测
+            patterns = self.find_enhanced_patterns(df)
+            
+            if patterns:
+                self.add_log(f"🎯 {symbol} 发现 {len(patterns)} 个形态")
+                self.pattern_count += len(patterns)
+                
+                # 计算完整技术指标
+                df = self.calculate_indicators(df)
+                
+                # 分析每个形态并发送信号
+                for pattern in patterns:
+                    asyncio.create_task(self.analyze_pattern(symbol, df, pattern))
+            else:
+                self.add_log(f"⭕ {symbol} 未发现形态")
                 
         except Exception as e:
-            self.add_log(f"❌ 处理K线数据错误: {str(e)}")
+            self.add_log(f"❌ {symbol} 处理K线数据错误: {str(e)}")
+            logger.error(f"处理K线数据失败 {symbol}: {e}")
+            logger.error(f"详细错误: {traceback.format_exc()}")
     
+    def calculate_basic_indicators(self, df):
+        """计算基础技术指标"""
+        try:
+            # ATR (Average True Range)
+            high_low = df['high'] - df['low']
+            high_close = np.abs(df['high'] - df['close'].shift())
+            low_close = np.abs(df['low'] - df['close'].shift())
+            ranges = pd.concat([high_low, high_close, low_close], axis=1)
+            true_range = ranges.max(axis=1)
+            df['atr'] = true_range.rolling(window=14).mean()
+            
+            # EMA
+            df['ema_20'] = df['close'].ewm(span=20).mean()
+            df['ema_50'] = df['close'].ewm(span=50).mean()
+            
+            return df
+        except Exception as e:
+            logger.error(f"计算基础指标失败: {e}")
+            return df
+    
+    def calculate_indicators(self, df):
+        """计算完整技术指标"""
+        try:
+            # MACD
+            exp1 = df['close'].ewm(span=12).mean()
+            exp2 = df['close'].ewm(span=26).mean()
+            df['macd'] = exp1 - exp2
+            df['macd_signal'] = df['macd'].ewm(span=9).mean()
+            df['macd_histogram'] = df['macd'] - df['macd_signal']
+            
+            # RSI
+            delta = df['close'].diff()
+            gain = (delta.where(delta > 0, 0)).rolling(window=14).mean()
+            loss = (-delta.where(delta < 0, 0)).rolling(window=14).mean()
+            rs = gain / loss
+            df['rsi'] = 100 - (100 / (1 + rs))
+            
+            # 成交量移动平均
+            df['volume_ma'] = df['volume'].rolling(window=20).mean()
+            
+            return df
+        except Exception as e:
+            logger.error(f"计算技术指标失败: {e}")
+            return df
+    
+    def find_enhanced_patterns(self, df):
+        """检测增强形态"""
+        patterns = []
+        
+        try:
+            # 检测双顶双底形态
+            double_patterns = self._detect_double_patterns(df)
+            patterns.extend(double_patterns)
+            
+            # 检测头肩形态
+            head_shoulder_patterns = self._detect_head_shoulder_patterns(df)
+            patterns.extend(head_shoulder_patterns)
+            
+        except Exception as e:
+            logger.error(f"形态检测失败: {e}")
+        
+        return patterns
+    
+    def _detect_double_patterns(self, df):
+        """检测双顶双底形态"""
+        patterns = []
+        
+        try:
+            if len(df) < 50:
+                return patterns
+            
+            # 检查ATR是否存在
+            if 'atr' not in df.columns or df['atr'].isna().all():
+                return patterns
+            
+            # 寻找局部极值点
+            highs = df['high'].rolling(window=5, center=True).max() == df['high']
+            lows = df['low'].rolling(window=5, center=True).min() == df['low']
+            
+            high_points = df[highs].tail(10)
+            low_points = df[lows].tail(10)
+            
+            # 检测双顶
+            if len(high_points) >= 2:
+                for i in range(len(high_points) - 1):
+                    peak1 = high_points.iloc[i]
+                    peak2 = high_points.iloc[i + 1]
+                    
+                    height_ratio = abs(peak1['high'] - peak2['high']) / peak1['high']
+                    if height_ratio < 0.02:  # 高度相似
+                        patterns.append({
+                            'type': 'double_top',
+                            'timestamp': peak2.name,
+                            'price': peak2['high'],
+                            'confidence': 0.8
+                        })
+            
+            # 检测双底
+            if len(low_points) >= 2:
+                for i in range(len(low_points) - 1):
+                    trough1 = low_points.iloc[i]
+                    trough2 = low_points.iloc[i + 1]
+                    
+                    height_ratio = abs(trough1['low'] - trough2['low']) / trough1['low']
+                    if height_ratio < 0.02:  # 高度相似
+                        patterns.append({
+                            'type': 'double_bottom',
+                            'timestamp': trough2.name,
+                            'price': trough2['low'],
+                            'confidence': 0.8
+                        })
+        
+        except Exception as e:
+            logger.error(f"双顶双底检测失败: {e}")
+        
+        return patterns
+    
+    def _detect_head_shoulder_patterns(self, df):
+        """检测头肩形态"""
+        patterns = []
+        
+        try:
+            if len(df) < 50:
+                return patterns
+            
+            # 寻找局部极值点
+            highs = df['high'].rolling(window=5, center=True).max() == df['high']
+            lows = df['low'].rolling(window=5, center=True).min() == df['low']
+            
+            high_points = df[highs].tail(15)
+            low_points = df[lows].tail(15)
+            
+            # 检测头肩顶
+            if len(high_points) >= 3:
+                for i in range(len(high_points) - 2):
+                    left_shoulder = high_points.iloc[i]
+                    head = high_points.iloc[i + 1]
+                    right_shoulder = high_points.iloc[i + 2]
+                    
+                    # 头部应该是最高点
+                    if (head['high'] > left_shoulder['high'] and 
+                        head['high'] > right_shoulder['high']):
+                        
+                        # 肩部高度相似
+                        shoulder_ratio = abs(left_shoulder['high'] - right_shoulder['high']) / left_shoulder['high']
+                        if shoulder_ratio < 0.03:
+                            patterns.append({
+                                'type': 'head_shoulder_top',
+                                'timestamp': right_shoulder.name,
+                                'price': right_shoulder['high'],
+                                'confidence': 0.85
+                            })
+            
+            # 检测头肩底
+            if len(low_points) >= 3:
+                for i in range(len(low_points) - 2):
+                    left_shoulder = low_points.iloc[i]
+                    head = low_points.iloc[i + 1]
+                    right_shoulder = low_points.iloc[i + 2]
+                    
+                    # 头部应该是最低点
+                    if (head['low'] < left_shoulder['low'] and 
+                        head['low'] < right_shoulder['low']):
+                        
+                        # 肩部高度相似
+                        shoulder_ratio = abs(left_shoulder['low'] - right_shoulder['low']) / left_shoulder['low']
+                        if shoulder_ratio < 0.03:
+                            patterns.append({
+                                'type': 'head_shoulder_bottom',
+                                'timestamp': right_shoulder.name,
+                                'price': right_shoulder['low'],
+                                'confidence': 0.85
+                            })
+        
+        except Exception as e:
+            logger.error(f"头肩形态检测失败: {e}")
+        
+        return patterns
+    
+    async def analyze_pattern(self, symbol, df, pattern):
+        """分析形态并生成信号"""
+        try:
+            # 检测背离
+            macd_divergence = self._detect_macd_divergence(df)
+            rsi_divergence = self._detect_rsi_divergence(df)
+            volume_divergence = self._detect_volume_divergence(df)
+            
+            # 检测蜡烛图形态
+            candle_pattern = self._detect_candle_patterns(df)
+            
+            # 检查趋势状态
+            trend_status = self._get_trend_status(df)
+            
+            # 创建信号数据
+            signal_data = SignalData(
+                symbol=symbol,
+                timestamp=pattern['timestamp'],
+                price=pattern['price'],
+                pattern_type=pattern['type'],
+                trend_status=trend_status,
+                macd_divergence=macd_divergence,
+                rsi_divergence=rsi_divergence,
+                volume_divergence=volume_divergence,
+                candle_pattern=candle_pattern
+            )
+            
+            # 发送信号到webhook
+            await self.send_signal_to_webhook(signal_data)
+            
+        except Exception as e:
+            logger.error(f"分析形态失败 {symbol}: {e}")
+    
+    def _detect_macd_divergence(self, df):
+        """检测MACD背离"""
+        try:
+            if len(df) < 20 or 'macd' not in df.columns:
+                return False
+            
+            recent_data = df.tail(20)
+            price_trend = recent_data['close'].iloc[-1] > recent_data['close'].iloc[0]
+            macd_trend = recent_data['macd'].iloc[-1] > recent_data['macd'].iloc[0]
+            
+            return price_trend != macd_trend
+        except:
+            return False
+    
+    def _detect_rsi_divergence(self, df):
+        """检测RSI背离"""
+        try:
+            if len(df) < 20 or 'rsi' not in df.columns:
+                return False
+            
+            recent_data = df.tail(20)
+            price_trend = recent_data['close'].iloc[-1] > recent_data['close'].iloc[0]
+            rsi_trend = recent_data['rsi'].iloc[-1] > recent_data['rsi'].iloc[0]
+            
+            return price_trend != rsi_trend
+        except:
+            return False
+    
+    def _detect_volume_divergence(self, df):
+        """检测成交量背离"""
+        try:
+            if len(df) < 20 or 'volume_ma' not in df.columns:
+                return False
+            
+            recent_data = df.tail(20)
+            price_trend = recent_data['close'].iloc[-1] > recent_data['close'].iloc[0]
+            volume_trend = recent_data['volume'].iloc[-1] > recent_data['volume_ma'].iloc[-1]
+            
+            return price_trend and not volume_trend
+        except:
+            return False
+    
+    def _detect_candle_patterns(self, df):
+        """检测蜡烛图形态"""
+        try:
+            if len(df) < 2:
+                return "无"
+            
+            current = df.iloc[-1]
+            previous = df.iloc[-2]
+            
+            # 看涨吞没
+            if (previous['close'] < previous['open'] and  # 前一根是阴线
+                current['close'] > current['open'] and    # 当前是阳线
+                current['open'] < previous['close'] and   # 当前开盘低于前一根收盘
+                current['close'] > previous['open']):     # 当前收盘高于前一根开盘
+                return "看涨吞没"
+            
+            # 看跌吞没
+            if (previous['close'] > previous['open'] and  # 前一根是阳线
+                current['close'] < current['open'] and    # 当前是阴线
+                current['open'] > previous['close'] and   # 当前开盘高于前一根收盘
+                current['close'] < previous['open']):     # 当前收盘低于前一根开盘
+                return "看跌吞没"
+            
+            return "无"
+        except:
+            return "无"
+    
+    def _get_trend_status(self, df):
+        """获取趋势状态"""
+        try:
+            if len(df) < 50 or 'ema_20' not in df.columns or 'ema_50' not in df.columns:
+                return "未知"
+            
+            current_price = df['close'].iloc[-1]
+            ema_20 = df['ema_20'].iloc[-1]
+            ema_50 = df['ema_50'].iloc[-1]
+            
+            if current_price > ema_20 > ema_50:
+                return "强势上涨"
+            elif current_price > ema_20 and ema_20 < ema_50:
+                return "弱势上涨"
+            elif current_price < ema_20 < ema_50:
+                return "强势下跌"
+            elif current_price < ema_20 and ema_20 > ema_50:
+                return "弱势下跌"
+            else:
+                return "震荡"
+        except:
+            return "未知"
+    
+    async def send_signal_to_webhook(self, signal_data):
+        """发送信号到webhook"""
+        try:
+            if not self.webhook_url:
+                logger.warning("Webhook URL未配置")
+                return
+            
+            payload = {
+                "symbol": signal_data.symbol,
+                "timestamp": signal_data.timestamp.isoformat(),
+                "price": signal_data.price,
+                "pattern_type": signal_data.pattern_type,
+                "trend_status": signal_data.trend_status,
+                "macd_divergence": signal_data.macd_divergence,
+                "rsi_divergence": signal_data.rsi_divergence,
+                "volume_divergence": signal_data.volume_divergence,
+                "candle_pattern": signal_data.candle_pattern
+            }
+            
+            # 发送webhook通知
+            self.signal_count += 1
+            self.add_log(f"🚀 {signal_data.symbol}: {signal_data.pattern_type} 信号已发送")
+            
+            # 这里可以添加实际的HTTP请求发送逻辑
+            logger.info(f"信号发送: {payload}")
+            
+        except Exception as e:
+            logger.error(f"发送信号失败: {e}")
+       
     def _send_webhook_notification(self, symbol, signal_type, price_change, price):
         """发送webhook通知"""
         webhook_url = os.getenv('WEBHOOK_URL')
@@ -306,7 +719,7 @@ class MonitorApp:
     def get_status(self):
         """获取运行状态"""
         if not self.is_running:
-            return "🔴 未运行", "\n".join(self.status_log), "0", "00:00:00"
+            return "🔴 未运行", "\n".join(self.status_log), "0", "00:00:00", "0", "0"
         
         # 计算运行时间
         if self.start_time:
@@ -318,8 +731,10 @@ class MonitorApp:
         status = "🟢 运行中 (实时模式)"
         logs = "\n".join(self.status_log)
         signals = str(self.signal_count)
+        patterns = str(self.pattern_count)
+        messages = str(self.message_count)
         
-        return status, logs, signals, runtime_str
+        return status, logs, signals, runtime_str, patterns, messages
     
     def get_config_info(self):
         """获取配置信息 - 与enhanced_realtime_monitor.py保持一致"""
@@ -389,6 +804,8 @@ def index():
                 .then(data => {
                     document.getElementById('status').textContent = data.status;
                     document.getElementById('signals').textContent = data.signal_count;
+                    document.getElementById('patterns').textContent = data.pattern_count;
+                    document.getElementById('messages').textContent = data.message_count;
                     document.getElementById('runtime').textContent = data.runtime;
                     document.getElementById('logs').textContent = data.logs;
                 })
@@ -425,6 +842,14 @@ def index():
                 <div id="signals">0</div>
             </div>
             <div class="status-card">
+                <h3>形态数量</h3>
+                <div id="patterns">0</div>
+            </div>
+            <div class="status-card">
+                <h3>消息数量</h3>
+                <div id="messages">0</div>
+            </div>
+            <div class="status-card">
                 <h3>运行时间</h3>
                 <div id="runtime">00:00:00</div>
             </div>
@@ -447,12 +872,14 @@ def index():
 @app.route('/api/status')
 def api_status():
     """获取状态API"""
-    status, logs, signals, runtime = monitor_app.get_status()
+    status, logs, signals, runtime, patterns, messages = monitor_app.get_status()
     return jsonify({
         'status': status,
         'logs': logs,
         'signal_count': signals,
-        'runtime': runtime
+        'runtime': runtime,
+        'pattern_count': patterns,
+        'message_count': messages
     })
 
 @app.route('/api/stop', methods=['POST'])
